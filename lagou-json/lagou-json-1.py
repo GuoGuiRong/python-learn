@@ -3,7 +3,7 @@ import requests
 import codecs
 import json
 from bs4 import BeautifulSoup
-
+#爬取拉钩网最新的30页数据
 def get_data():
     headers = {
         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
@@ -12,16 +12,53 @@ def get_data():
     }
     url='https://www.lagou.com/jobs/positionAjax.json?px=new&needAddtionalResult=false'
     formData={'pn':'1','kd':'','first':'true'}
-    data = requests.post(url, headers=headers,params=formData).json()['content']
-    parse_json(data) 
+    i = 0
+    while(True):
+        data = requests.post(url, headers=headers,params=formData).json()['content']
+        parse_json(data)
+        i = i+1
+        formData={'pn':i,'kd':'','first':'true'}
+        if(i==30):
+            break
+       
+       
+    
 
 def parse_json(data):
     dat = data['positionResult']
-    print(dat['result'])
+    result = dat['result']
+    positionName=[]
+    workYear = []
+    education = []
+    jobNature = []
+    createTime = []
+    city = []
+    salary = []
+    positionAdvantage = []
+    financeStage = []
+    firstType = []
+    secondType = []
+    for dic in result:
+        positionName.append(dic['positionName'])
+        workYear.append(dic['workYear'])
+        education.append(dic['education'])  
+        jobNature.append(dic['jobNature'])
+        createTime.append(dic['createTime'])
+        city.append(dic['city'])
+        salary.append(dic['salary'])
+        positionAdvantage.append(dic['positionAdvantage'])
+        financeStage.append(dic['financeStage'])
+        firstType.append(dic['firstType'])
+        secondType.append(dic['secondType'])
     #这里可以自己想办法写入文件
-    
-    
-     
+    with open('c://Users/GuiRunning/Desktop/python-learn/lagou-json/lagou.txt', 'a') as fp:
+        for i in range(len(positionName)):
+            try:
+                item = positionName[i]+'\t'+workYear[i]+'\t'+education[i]+'\t'+jobNature[i]+'\t'+createTime[i]+'\t'+city[i]+'\t'+salary[i]+'\t'+positionAdvantage[i]+'\t'+financeStage[i]+'\t'+firstType[i]+'\t'+secondType[i]
+                fp.write(item+'\n')
+                print(item)
+            except:
+                continue  
 def main():
     get_data()
     
