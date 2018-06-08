@@ -13,3 +13,7 @@
   ##### lagou-json 拉钩json数据爬取
   
   * lagou-json-1.py 分析爬取拉钩网的招聘信息
+  
+  ##### ximalaya-vedio 爬取喜马拉雅音频
+  
+  * ximalaya-all.py 爬取喜马拉雅所有免费音频
