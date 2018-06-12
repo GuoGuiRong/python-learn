@@ -17,3 +17,11 @@
   ##### ximalaya-vedio 爬取喜马拉雅音频
   
   * ximalaya-all.py 爬取喜马拉雅所有免费音频
+  
+  * ximalaya-process.py python3进程的使用
+  
+  * ximalaya-processpool.py python3进程池的使用
+  
+  * ximalaya-thread.py python3线程的使用
+  
+  * ximalaya-all.py python3线程池的使用
